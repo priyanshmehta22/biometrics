@@ -1,0 +1,25 @@
+import cv2
+cameraCapture = cv2.VideoCapture(0)
+fps = 30   #Frames per second
+size = (int(cameraCapture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cameraCapture.get(cv2.CAP_PROP_FRAME_HEIGHT))) 
+#size --- this will capture the width and height of the video
+videoWriter = cv2.VideoWriter('MyVideo.avi', cv2.VideoWriter_fourcc('I','4','2','0'), fps, size)
+
+ 
+
+success, frame = cameraCapture.read()
+# read is a function not attribute since it is followed by ()
+# read fxn reads frame by frame
+# success is a boolean type variable
+
+ 
+
+numFramesRemaining = 10*fps - 1 
+# numFramesRemaining is the number of seconds video will get recorded
+
+ 
+
+while success and numFramesRemaining>0:
+    videoWriter.write(frame)
+    success, frame = cameraCapture.read()
+    numFramesRemaining -= 1
